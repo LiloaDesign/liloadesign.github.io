@@ -23,6 +23,11 @@
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans: 'Jost', sans-serif;
       --transition: 0.25s ease;
+
+      /* Progressive blue tones */
+      --section-1: #f5f7fc;
+      --section-2: #e8eef8;
+      --section-3: #d8e4f4;
     }
 
     body {
@@ -184,96 +189,127 @@
     .breadcrumb a:hover { color: var(--black); }
     .breadcrumb span { margin: 0 0.5rem; }
 
-    /* COLLECTIONS GRID */
-    .collections-section {
-      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+    /* CATEGORY SECTION */
+    .category-section {
+      padding: 0 0 clamp(4rem, 8vw, 7rem);
     }
 
-    .collections-grid {
+    .category-section:nth-child(1) { background: var(--section-1); }
+    .category-section:nth-child(2) { background: var(--section-2); }
+    .category-section:nth-child(3) { background: var(--section-3); }
+
+    /* CATEGORY HEADING BAR */
+    .category-bar {
+      background: var(--black);
+      color: var(--white);
+      padding: 1.4rem clamp(1.5rem, 5vw, 4rem);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 0;
+    }
+
+    .category-bar-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .category-bar-link {
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding-bottom: 2px;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .category-bar-link:hover { color: var(--white); border-color: var(--white); }
+
+    /* LIFESTYLE IMAGE */
+    .lifestyle-image {
+      width: 100%;
+      height: clamp(280px, 40vw, 520px);
+      background: var(--gray-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    }
+
+    /* PRODUCT GRID */
+    .product-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
     }
 
-    .collection-card {
+    .card {
       text-decoration: none;
       color: inherit;
       display: block;
       cursor: pointer;
     }
 
-    .collection-img {
-      background: var(--black);
+    .card-img {
       aspect-ratio: 3/4;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.8rem;
       overflow: hidden;
       position: relative;
-      display: flex;
-      align-items: flex-end;
+      background: white;
     }
 
-    .collection-img-inner {
+    .card-img-inner {
       width: 100%;
       height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--gray-mid);
       transition: transform 0.5s ease;
-      position: absolute;
+      background: rgba(255,255,255,0.6);
     }
 
-    .collection-card:hover .collection-img-inner { transform: scale(1.03); }
+    .card:hover .card-img-inner { transform: scale(1.03); }
 
-    .collection-overlay {
-      position: relative;
-      z-index: 1;
-      padding: 1.5rem;
-      width: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
-    }
-
-    .collection-overlay-title {
-      font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-      font-weight: 300;
-      color: var(--white);
-      letter-spacing: 0.06em;
-      margin-bottom: 0.4rem;
-    }
-
-    .collection-overlay-count {
-      font-size: 0.65rem;
-      letter-spacing: 0.16em;
+    .card-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
-    }
-
-    .collection-desc {
-      font-size: 0.82rem;
       color: var(--gray-mid);
-      line-height: 1.8;
-      margin-bottom: 1rem;
+      margin-bottom: 0.3rem;
     }
 
-    .collection-link {
-      font-size: 0.7rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--black);
-      border-bottom: 1px solid var(--black);
-      padding-bottom: 2px;
-      transition: opacity var(--transition);
+    .card-name {
+      font-family: var(--font-serif);
+      font-size: 1.05rem;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      margin-bottom: 0.2rem;
     }
-    .collection-card:hover .collection-link { opacity: 0.5; }
+
+    .card-price {
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--gray-dark);
+    }
 
     /* FOOTER */
     footer {
       border-top: 1px solid var(--gray-light);
       padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem) 2rem;
+      background: var(--white);
     }
 
     .footer-top {
@@ -329,7 +365,6 @@
     }
 
     .footer-bottom p { font-size: 0.72rem; color: var(--gray-mid); letter-spacing: 0.06em; }
-
     .footer-legal { display: flex; gap: 1.5rem; }
 
     .footer-legal a {
@@ -344,11 +379,12 @@
     @media (max-width: 900px) {
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .collections-grid { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: repeat(2, 1fr); }
       .footer-top { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 560px) {
+      .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
     }
@@ -387,61 +423,73 @@
     </ul>
   </div>
 
-  <!-- PAGE HEADER -->
   <div class="page-header">
     <h1>Collections</h1>
     <p>Rooted in culture. Built with intention. Explore what we make.</p>
   </div>
 
-  <!-- BREADCRUMB -->
   <div class="breadcrumb">
     <a href="index.html">Home</a>
     <span>›</span>
     Collections
   </div>
 
-  <!-- COLLECTIONS -->
-  <section class="collections-section">
-    <div class="collections-grid">
-
-      <a class="collection-card" href="#">
-        <div class="collection-img">
-          <div class="collection-img-inner">Image</div>
-          <div class="collection-overlay">
-            <p class="collection-overlay-title">Apparel</p>
-            <p class="collection-overlay-count">Coming Soon</p>
-          </div>
-        </div>
-        <p class="collection-desc">Wearables rooted in where we're from. Designed for everyday life, made to last.</p>
-        <span class="collection-link">Shop Apparel</span>
-      </a>
-
-      <a class="collection-card" href="#">
-        <div class="collection-img">
-          <div class="collection-img-inner">Image</div>
-          <div class="collection-overlay">
-            <p class="collection-overlay-title">Culture</p>
-            <p class="collection-overlay-count">Coming Soon</p>
-          </div>
-        </div>
-        <p class="collection-desc">Digital prints, photography, and art that keeps the culture alive wherever you are.</p>
-        <span class="collection-link">Explore Culture</span>
-      </a>
-
-      <a class="collection-card" href="#">
-        <div class="collection-img">
-          <div class="collection-img-inner">Image</div>
-          <div class="collection-overlay">
-            <p class="collection-overlay-title">Accessories</p>
-            <p class="collection-overlay-count">Coming Soon</p>
-          </div>
-        </div>
-        <p class="collection-desc">The finishing touches. Pieces that carry meaning and complete the look.</p>
-        <span class="collection-link">Shop Accessories</span>
-      </a>
-
+  <!-- APPAREL -->
+  <div class="category-section">
+    <div class="category-bar">
+      <span class="category-bar-title">Apparel</span>
+      <a href="#" class="category-bar-link">View All Apparel</a>
     </div>
-  </section>
+    <div class="lifestyle-image">Lifestyle Image — Apparel</div>
+    <div class="product-grid">
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Apparel</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Apparel</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Apparel</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Apparel</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Apparel</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Apparel</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Apparel</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Apparel</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+    </div>
+  </div>
+
+  <!-- CULTURE -->
+  <div class="category-section">
+    <div class="category-bar">
+      <span class="category-bar-title">Culture</span>
+      <a href="#" class="category-bar-link">View All Culture</a>
+    </div>
+    <div class="lifestyle-image">Lifestyle Image — Culture</div>
+    <div class="product-grid">
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Culture</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Culture</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Culture</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Culture</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Culture</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Culture</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Culture</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Culture</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+    </div>
+  </div>
+
+  <!-- ACCESSORIES -->
+  <div class="category-section">
+    <div class="category-bar">
+      <span class="category-bar-title">Accessories</span>
+      <a href="#" class="category-bar-link">View All Accessories</a>
+    </div>
+    <div class="lifestyle-image">Lifestyle Image — Accessories</div>
+    <div class="product-grid">
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Accessories</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Accessories</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Accessories</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Accessories</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Accessories</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Accessories</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Accessories</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+      <a class="card" href="#"><div class="card-img"><div class="card-img-inner">Image</div></div><p class="card-label">Accessories</p><p class="card-name">Product Name</p><p class="card-price">$000</p></a>
+    </div>
+  </div>
 
   <footer>
     <div class="footer-top">
