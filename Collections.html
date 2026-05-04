@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Collections — Liloa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --black: #0c111a;
+      --white: #fafbff;
+      --cream: #edf1f8;
+      --gray-light: #d6dde9;
+      --gray-mid: #7d8fa6;
+      --gray-dark: #2c3a50;
+      --nav-h: 72px;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Jost', sans-serif;
+      --transition: 0.25s ease;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--black);
+      background: var(--white);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    #nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-light);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      transition: box-shadow var(--transition);
+    }
+
+    #nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.07); }
+
+    .nav-brand {
+      font-family: var(--font-serif);
+      font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), color var(--transition);
+    }
+
+    .nav-links a:hover { border-color: var(--black); }
+    .nav-links a.active { border-color: var(--black); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      color: var(--black);
+      transition: opacity var(--transition);
+    }
+    .nav-icon-btn:hover { opacity: 0.55; }
+    .nav-icon-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--black);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    #mobile-menu {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-light);
+      z-index: 998;
+      transform: translateY(-110%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 2rem clamp(1.5rem, 5vw, 4rem);
+    }
+    #mobile-menu.open { transform: translateY(0); }
+    #mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; }
+    #mobile-menu ul a { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--black); }
+
+    /* PAGE HEADER */
+    .page-header {
+      background: var(--cream);
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+      text-align: center;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .page-header h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      margin-bottom: 1rem;
+    }
+
+    .page-header p {
+      font-size: 0.88rem;
+      color: var(--gray-mid);
+      letter-spacing: 0.06em;
+      max-width: 40ch;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    /* BREADCRUMB */
+    .breadcrumb {
+      padding: 1rem clamp(1.5rem, 5vw, 4rem);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .breadcrumb a {
+      color: var(--gray-mid);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .breadcrumb a:hover { color: var(--black); }
+    .breadcrumb span { margin: 0 0.5rem; }
+
+    /* COLLECTIONS GRID */
+    .collections-section {
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .collections-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .collection-card {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      cursor: pointer;
+    }
+
+    .collection-img {
+      background: var(--black);
+      aspect-ratio: 3/4;
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .collection-img-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      transition: transform 0.5s ease;
+      position: absolute;
+    }
+
+    .collection-card:hover .collection-img-inner { transform: scale(1.03); }
+
+    .collection-overlay {
+      position: relative;
+      z-index: 1;
+      padding: 1.5rem;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+    }
+
+    .collection-overlay-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      font-weight: 300;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.4rem;
+    }
+
+    .collection-overlay-count {
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .collection-desc {
+      font-size: 0.82rem;
+      color: var(--gray-mid);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .collection-link {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 2px;
+      transition: opacity var(--transition);
+    }
+    .collection-card:hover .collection-link { opacity: 0.5; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--gray-light);
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem) 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand-name {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: var(--gray-mid);
+      max-width: 28ch;
+    }
+
+    .footer-col h4 {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.7rem; }
+
+    .footer-col ul a {
+      font-size: 0.82rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-col ul a:hover { color: var(--black); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--gray-light);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .footer-bottom p { font-size: 0.72rem; color: var(--gray-mid); letter-spacing: 0.06em; }
+
+    .footer-legal { display: flex; gap: 1.5rem; }
+
+    .footer-legal a {
+      font-size: 0.72rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color var(--transition);
+    }
+    .footer-legal a:hover { color: var(--black); }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .collections-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="nav">
+    <a class="nav-brand" href="index.html">Liloa</a>
+    <ul class="nav-links">
+      <li><a href="collections.html" class="active">Collections</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Journal</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      </button>
+      <button class="nav-icon-btn" aria-label="Bag">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-menu">
+    <ul>
+      <li><a href="collections.html">Collections</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Journal</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <div class="page-header">
+    <h1>Collections</h1>
+    <p>Rooted in culture. Built with intention. Explore what we make.</p>
+  </div>
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    Collections
+  </div>
+
+  <!-- COLLECTIONS -->
+  <section class="collections-section">
+    <div class="collections-grid">
+
+      <a class="collection-card" href="#">
+        <div class="collection-img">
+          <div class="collection-img-inner">Image</div>
+          <div class="collection-overlay">
+            <p class="collection-overlay-title">Apparel</p>
+            <p class="collection-overlay-count">Coming Soon</p>
+          </div>
+        </div>
+        <p class="collection-desc">Wearables rooted in where we're from. Designed for everyday life, made to last.</p>
+        <span class="collection-link">Shop Apparel</span>
+      </a>
+
+      <a class="collection-card" href="#">
+        <div class="collection-img">
+          <div class="collection-img-inner">Image</div>
+          <div class="collection-overlay">
+            <p class="collection-overlay-title">Culture</p>
+            <p class="collection-overlay-count">Coming Soon</p>
+          </div>
+        </div>
+        <p class="collection-desc">Digital prints, photography, and art that keeps the culture alive wherever you are.</p>
+        <span class="collection-link">Explore Culture</span>
+      </a>
+
+      <a class="collection-card" href="#">
+        <div class="collection-img">
+          <div class="collection-img-inner">Image</div>
+          <div class="collection-overlay">
+            <p class="collection-overlay-title">Accessories</p>
+            <p class="collection-overlay-count">Coming Soon</p>
+          </div>
+        </div>
+        <p class="collection-desc">The finishing touches. Pieces that carry meaning and complete the look.</p>
+        <span class="collection-link">Shop Accessories</span>
+      </a>
+
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-top">
+      <div>
+        <p class="footer-brand-name">Liloa</p>
+        <p class="footer-tagline">A short description of who you are and what you stand for.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">All Products</a></li>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="#">Sale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Liloa. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+    <p style="margin-top: 1.5rem; font-family: var(--font-serif); font-size: 0.65rem; letter-spacing: 0.24em; color: var(--gray-light); font-style: italic; text-align: center;">from the dirt</p>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('hamburger');
+      menu.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
