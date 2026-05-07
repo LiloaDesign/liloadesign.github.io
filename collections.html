@@ -24,7 +24,6 @@
       --font-sans: 'Jost', sans-serif;
       --transition: 0.25s ease;
 
-      /* Progressive blue tones */
       --section-1: #f5f7fc;
       --section-2: #e8eef8;
       --section-3: #d8e4f4;
@@ -39,7 +38,6 @@
       overflow-x: hidden;
     }
 
-    /* NAV */
     #nav {
       position: sticky;
       top: 0;
@@ -146,7 +144,6 @@
     #mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; }
     #mobile-menu ul a { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--black); }
 
-    /* PAGE HEADER */
     .page-header {
       background: var(--cream);
       padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem);
@@ -171,7 +168,6 @@
       line-height: 1.8;
     }
 
-    /* BREADCRUMB */
     .breadcrumb {
       padding: 1rem clamp(1.5rem, 5vw, 4rem);
       font-size: 0.7rem;
@@ -181,24 +177,15 @@
       border-bottom: 1px solid var(--gray-light);
     }
 
-    .breadcrumb a {
-      color: var(--gray-mid);
-      text-decoration: none;
-      transition: color var(--transition);
-    }
+    .breadcrumb a { color: var(--gray-mid); text-decoration: none; transition: color var(--transition); }
     .breadcrumb a:hover { color: var(--black); }
     .breadcrumb span { margin: 0 0.5rem; }
 
-    /* CATEGORY SECTION */
-    .category-section {
-      padding: 0 0 clamp(4rem, 8vw, 7rem);
-    }
+    .category-section { padding: 0 0 clamp(4rem, 8vw, 7rem); }
+    .category-section:nth-of-type(1) { background: var(--section-1); }
+    .category-section:nth-of-type(2) { background: var(--section-2); }
+    .category-section:nth-of-type(3) { background: var(--section-3); }
 
-    .category-section:nth-child(1) { background: var(--section-1); }
-    .category-section:nth-child(2) { background: var(--section-2); }
-    .category-section:nth-child(3) { background: var(--section-3); }
-
-    /* CATEGORY HEADING BAR */
     .category-bar {
       background: var(--black);
       color: var(--white);
@@ -229,7 +216,6 @@
     }
     .category-bar-link:hover { color: var(--white); border-color: var(--white); }
 
-    /* LIFESTYLE IMAGE */
     .lifestyle-image {
       width: 100%;
       height: clamp(280px, 40vw, 520px);
@@ -244,7 +230,6 @@
       margin-bottom: clamp(2rem, 4vw, 3.5rem);
     }
 
-    /* PRODUCT GRID */
     .product-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -252,12 +237,7 @@
       padding: 0 clamp(1.5rem, 5vw, 4rem);
     }
 
-    .card {
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      cursor: pointer;
-    }
+    .card { text-decoration: none; color: inherit; display: block; cursor: pointer; }
 
     .card-img {
       aspect-ratio: 3/4;
@@ -283,29 +263,10 @@
 
     .card:hover .card-img-inner { transform: scale(1.03); }
 
-    .card-label {
-      font-size: 0.62rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gray-mid);
-      margin-bottom: 0.3rem;
-    }
+    .card-label { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-mid); margin-bottom: 0.3rem; }
+    .card-name { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 300; letter-spacing: 0.03em; margin-bottom: 0.2rem; }
+    .card-price { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--gray-dark); }
 
-    .card-name {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-      font-weight: 300;
-      letter-spacing: 0.03em;
-      margin-bottom: 0.2rem;
-    }
-
-    .card-price {
-      font-size: 0.78rem;
-      letter-spacing: 0.06em;
-      color: var(--gray-dark);
-    }
-
-    /* FOOTER */
     footer {
       border-top: 1px solid var(--gray-light);
       padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem) 2rem;
@@ -319,39 +280,12 @@
       margin-bottom: 3rem;
     }
 
-    .footer-brand-name {
-      font-family: var(--font-serif);
-      font-size: 1.4rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .footer-tagline {
-      font-size: 0.82rem;
-      line-height: 1.8;
-      color: var(--gray-mid);
-      max-width: 28ch;
-    }
-
-    .footer-col h4 {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      font-weight: 400;
-    }
-
+    .footer-brand-name { font-family: var(--font-serif); font-size: 1.4rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1rem; }
+    .footer-tagline { font-size: 0.82rem; line-height: 1.8; color: var(--gray-mid); max-width: 28ch; }
+    .footer-col h4 { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.2rem; font-weight: 400; }
     .footer-col ul { list-style: none; }
     .footer-col ul li { margin-bottom: 0.7rem; }
-
-    .footer-col ul a {
-      font-size: 0.82rem;
-      color: var(--gray-mid);
-      text-decoration: none;
-      transition: color var(--transition);
-    }
+    .footer-col ul a { font-size: 0.82rem; color: var(--gray-mid); text-decoration: none; transition: color var(--transition); }
     .footer-col ul a:hover { color: var(--black); }
 
     .footer-bottom {
@@ -366,15 +300,26 @@
 
     .footer-bottom p { font-size: 0.72rem; color: var(--gray-mid); letter-spacing: 0.06em; }
     .footer-legal { display: flex; gap: 1.5rem; }
-
-    .footer-legal a {
-      font-size: 0.72rem;
-      color: var(--gray-mid);
-      text-decoration: none;
-      letter-spacing: 0.06em;
-      transition: color var(--transition);
-    }
+    .footer-legal a { font-size: 0.72rem; color: var(--gray-mid); text-decoration: none; letter-spacing: 0.06em; transition: color var(--transition); }
     .footer-legal a:hover { color: var(--black); }
+
+    .footer-socials {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 2rem 0 1rem;
+      border-top: 1px solid var(--gray-light);
+      margin-top: 1rem;
+    }
+
+    .social-icons { display: flex; gap: 2rem; align-items: center; }
+    .social-icons a { color: var(--gray-mid); transition: color var(--transition); display: flex; align-items: center; }
+    .social-icons a:hover { color: var(--black); }
+    .social-icons svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .footer-email { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--gray-mid); text-decoration: none; transition: color var(--transition); }
+    .footer-email:hover { color: var(--black); }
 
     @media (max-width: 900px) {
       .nav-links { display: none; }
@@ -397,7 +342,7 @@
     <a class="nav-brand" href="index.html">Liloa</a>
     <ul class="nav-links">
       <li><a href="collections.html" class="active">Collections</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="about.html">About</a></li>
       <li><a href="#">Journal</a></li>
       <li><a href="#">Contact</a></li>
     </ul>
@@ -417,7 +362,7 @@
   <div id="mobile-menu">
     <ul>
       <li><a href="collections.html">Collections</a></li>
-      <li><a href="#">About</a></li>
+      <li><a href="about.html">About</a></li>
       <li><a href="#">Journal</a></li>
       <li><a href="#">Contact</a></li>
     </ul>
@@ -434,8 +379,7 @@
     Collections
   </div>
 
-  <!-- APPAREL -->
-  <div class="category-section">
+  <div class="category-section" id="apparel">
     <div class="category-bar">
       <span class="category-bar-title">Apparel</span>
       <a href="#" class="category-bar-link">View All Apparel</a>
@@ -453,8 +397,7 @@
     </div>
   </div>
 
-  <!-- CULTURE -->
-  <div class="category-section">
+  <div class="category-section" id="culture">
     <div class="category-bar">
       <span class="category-bar-title">Culture</span>
       <a href="#" class="category-bar-link">View All Culture</a>
@@ -472,8 +415,7 @@
     </div>
   </div>
 
-  <!-- ACCESSORIES -->
-  <div class="category-section">
+  <div class="category-section" id="accessories">
     <div class="category-bar">
       <span class="category-bar-title">Accessories</span>
       <a href="#" class="category-bar-link">View All Accessories</a>
@@ -495,7 +437,7 @@
     <div class="footer-top">
       <div>
         <p class="footer-brand-name">Liloa</p>
-        <p class="footer-tagline">A short description of who you are and what you stand for.</p>
+        <p class="footer-tagline">Born from the Pacific. Built for those who know.</p>
       </div>
       <div class="footer-col">
         <h4>Shop</h4>
@@ -509,7 +451,7 @@
       <div class="footer-col">
         <h4>Company</h4>
         <ul>
-          <li><a href="#">About Us</a></li>
+          <li><a href="about.html">About Us</a></li>
           <li><a href="#">Journal</a></li>
           <li><a href="#">Press</a></li>
           <li><a href="#">Careers</a></li>
@@ -525,6 +467,7 @@
         </ul>
       </div>
     </div>
+
     <div class="footer-bottom">
       <p>© 2025 Liloa. All rights reserved.</p>
       <div class="footer-legal">
@@ -533,6 +476,22 @@
         <a href="#">Cookies</a>
       </div>
     </div>
+
+    <div class="footer-socials">
+      <div class="social-icons">
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <a href="#" aria-label="Twitter">
+          <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <a href="#" aria-label="TikTok">
+          <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+        </a>
+      </div>
+      <a href="mailto:liloarmp@gmail.com" class="footer-email">liloarmp@gmail.com</a>
+    </div>
+
     <p style="margin-top: 1.5rem; font-family: var(--font-serif); font-size: 0.65rem; letter-spacing: 0.24em; color: var(--gray-light); font-style: italic; text-align: center;">from the dirt</p>
   </footer>
 
