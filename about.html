@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Liloa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --black: #0c111a;
+      --white: #fafbff;
+      --cream: #edf1f8;
+      --gray-light: #d6dde9;
+      --gray-mid: #7d8fa6;
+      --gray-dark: #2c3a50;
+      --nav-h: 72px;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Jost', sans-serif;
+      --transition: 0.25s ease;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--black);
+      background: var(--white);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    #nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-light);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      transition: box-shadow var(--transition);
+    }
+
+    #nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,0.07); }
+
+    .nav-brand {
+      font-family: var(--font-serif);
+      font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      list-style: none;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--black);
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), color var(--transition);
+    }
+
+    .nav-links a:hover { border-color: var(--black); }
+    .nav-links a.active { border-color: var(--black); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-icon-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      color: var(--black);
+      transition: opacity var(--transition);
+    }
+    .nav-icon-btn:hover { opacity: 0.55; }
+    .nav-icon-btn svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1px;
+      background: var(--black);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    #mobile-menu {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-light);
+      z-index: 998;
+      transform: translateY(-110%);
+      transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 2rem clamp(1.5rem, 5vw, 4rem);
+    }
+    #mobile-menu.open { transform: translateY(0); }
+    #mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 1.4rem; }
+    #mobile-menu ul a { font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; text-decoration: none; color: var(--black); }
+
+    /* HERO IMAGE */
+    .about-hero {
+      width: 100%;
+      height: clamp(420px, 60vh, 700px);
+      background: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-dark);
+    }
+
+    /* BRAND STATEMENT */
+    .brand-statement {
+      background: var(--cream);
+      text-align: center;
+      padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .brand-statement .eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 2rem;
+    }
+
+    .brand-statement h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      margin-bottom: 2.5rem;
+    }
+
+    .brand-statement p {
+      font-size: 0.92rem;
+      line-height: 2;
+      color: var(--gray-dark);
+      max-width: 44ch;
+      margin: 0 auto;
+      letter-spacing: 0.04em;
+    }
+
+    /* VALUES */
+    .values {
+      background: var(--white);
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      border-top: 1px solid var(--gray-light);
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .value-item {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .value-word {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      margin-bottom: 1rem;
+    }
+
+    .value-desc {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+      line-height: 1.8;
+    }
+
+    /* SECOND IMAGE */
+    .about-image-2 {
+      width: 100%;
+      height: clamp(360px, 50vh, 600px);
+      background: var(--gray-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+
+    /* CLOSING LINE */
+    .closing {
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 5vw, 4rem);
+    }
+
+    .closing h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4.5vw, 3.8rem);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+      margin-bottom: 2rem;
+    }
+
+    .closing h2 em {
+      font-style: italic;
+    }
+
+    .closing a {
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--white);
+      border-bottom: 1px solid rgba(255,255,255,0.4);
+      padding-bottom: 3px;
+      text-decoration: none;
+      transition: border-color var(--transition);
+    }
+    .closing a:hover { border-color: var(--white); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--gray-light);
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4rem) 2rem;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .footer-brand-name {
+      font-family: var(--font-serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .footer-tagline {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: var(--gray-mid);
+      max-width: 28ch;
+    }
+
+    .footer-col h4 {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      font-weight: 400;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 0.7rem; }
+
+    .footer-col ul a {
+      font-size: 0.82rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-col ul a:hover { color: var(--black); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--gray-light);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .footer-bottom p { font-size: 0.72rem; color: var(--gray-mid); letter-spacing: 0.06em; }
+    .footer-legal { display: flex; gap: 1.5rem; }
+
+    .footer-legal a {
+      font-size: 0.72rem;
+      color: var(--gray-mid);
+      text-decoration: none;
+      letter-spacing: 0.06em;
+      transition: color var(--transition);
+    }
+    .footer-legal a:hover { color: var(--black); }
+
+    /* SOCIALS */
+    .footer-socials {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.2rem;
+      padding: 2rem 0 1rem;
+      border-top: 1px solid var(--gray-light);
+      margin-top: 1rem;
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .social-icons a {
+      color: var(--gray-mid);
+      transition: color var(--transition);
+      display: flex;
+      align-items: center;
+    }
+    .social-icons a:hover { color: var(--black); }
+    .social-icons svg { width: 20px; height: 20px; fill: currentColor; }
+
+    .footer-email {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--gray-mid);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-email:hover { color: var(--black); }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .values { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav id="nav">
+    <a class="nav-brand" href="index.html">Liloa</a>
+    <ul class="nav-links">
+      <li><a href="collections.html">Collections</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="#">Journal</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="nav-icon-btn" aria-label="Search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="22" y2="22"/></svg>
+      </button>
+      <button class="nav-icon-btn" aria-label="Bag">
+        <svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      </button>
+      <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div id="mobile-menu">
+    <ul>
+      <li><a href="collections.html">Collections</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="#">Journal</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- HERO IMAGE -->
+  <div class="about-hero">Your cinematic image here</div>
+
+  <!-- BRAND STATEMENT -->
+  <div class="brand-statement">
+    <p class="eyebrow">About</p>
+    <h1>Born from<br />the Pacific.</h1>
+    <p>We are Polynesian — raised on islands, living in the desert. Liloa exists to keep the culture, the language, and the spirit of home alive. Not for everyone. Built for those who know.</p>
+  </div>
+
+  <!-- VALUES -->
+  <div class="values">
+    <div class="value-item">
+      <p class="value-word">Roots</p>
+      <p class="value-desc">Born from the Pacific.<br />Grounded in where we're from.</p>
+    </div>
+    <div class="value-item">
+      <p class="value-word">Craft</p>
+      <p class="value-desc">Made with intention.<br />Nothing without purpose.</p>
+    </div>
+    <div class="value-item">
+      <p class="value-word">Community</p>
+      <p class="value-desc">Built for those who know.<br />A space to find each other.</p>
+    </div>
+  </div>
+
+  <!-- SECOND IMAGE -->
+  <div class="about-image-2">Your lifestyle image here</div>
+
+  <!-- CLOSING -->
+  <div class="closing">
+    <h2>Far from home.<br />Never <em>lost.</em></h2>
+    <a href="collections.html">Explore the Collection</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <p class="footer-brand-name">Liloa</p>
+        <p class="footer-tagline">Born from the Pacific. Built for those who know.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">All Products</a></li>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="collections.html">Collections</a></li>
+          <li><a href="#">Sale</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Liloa. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Cookies</a>
+      </div>
+    </div>
+
+    <div class="footer-socials">
+      <div class="social-icons">
+        <!-- Instagram -->
+        <a href="#" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+        <!-- Twitter/X -->
+        <a href="#" aria-label="Twitter">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
+        <!-- TikTok -->
+        <a href="#" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1.01-.07z"/></svg>
+        </a>
+      </div>
+      <a href="mailto:liloarmp@gmail.com" class="footer-email">liloarmp@gmail.com</a>
+    </div>
+
+    <p style="margin-top: 1.5rem; font-family: var(--font-serif); font-size: 0.65rem; letter-spacing: 0.24em; color: var(--gray-light); font-style: italic; text-align: center;">from the dirt</p>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 10);
+    });
+
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('hamburger');
+      menu.classList.toggle('open');
+      btn.classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
